@@ -49,8 +49,8 @@ summary(dfm)
 
 
 # Males and Females
-Males <- dfm[which(Data$Gender == "male"), ]
-Females <- dfm[which(Data$Gender == "female"), ]
+Males <- dfm[which(dfm$Gender == "male"), ]
+Females <- dfm[which(dfm$Gender == "female"), ]
 nrow(Males)
 nrow(Females)
 
@@ -68,9 +68,9 @@ nrow(Females_Survived)
 pie(c(nrow(Males_Survived), nrow(Females_Survived)), labels = lbls, main = "Pie Chart of Survivors in Titanic", col = c("red", "blue"))
 
 # Stacked Bar Chart of Survivors of Each Class
-counts <- table(Data$Survived, Data$Pclass)
+counts <- table(dfm$Survived, dfm$Pclass)
 barplot(counts, ylab = "Count", xlab = "Class", main = "Stacked Bar Chart of Survivors of each class", col = c("blue","red"))
-legend("top", title = "Survived", legend = sort(unique(Data$Survived)), fill = c("red","blue"))
+legend("top", title = "Survived", legend = sort(unique(dfm$Survived)), fill = c("red","blue"))
 
 # BoxPlot of Age
 boxplot(dfm$Age, main = "Age")
