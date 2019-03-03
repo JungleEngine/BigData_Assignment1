@@ -30,4 +30,9 @@ levels(dfm$Embarked)
 # Data preprocessing.
 # Remove Null Age rows.
 dfm <- na.omit(dfm, cols="Age")
-
+# Check Age has no NA records.
+if(anyNA(dfm$Age)){
+  "Age still has NA records"
+}
+# get records which only has values S, C, Q in embarked column.
+dfm <- dfm[dfm$Embarked == c("C", "S", "Q"),] 
