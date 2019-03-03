@@ -1,5 +1,6 @@
 # Clean environment 
 rm(list=ls())
+
 # Reading dataset.
 dfm <- read.csv("titanic.csv")
 # Showing dataset dimensions.
@@ -30,9 +31,18 @@ levels(dfm$Embarked)
 # Data preprocessing.
 # Remove Null Age rows.
 dfm <- na.omit(dfm, cols="Age")
+# get records which only has values S, C, Q in embarked column.
+dfm <- subset(dfm, dfm$Embarked == "C" | dfm$Embarked == "S" | dfm$Embarked == "Q")
+dfm$Embarked <- factor(dfm$Embarked)
+summary(dfm)
 # Check Age has no NA records.
 if(anyNA(dfm$Age)){
   "Age still has NA records"
 }
-# get records which only has values S, C, Q in embarked column.
-dfm <- dfm[dfm$Embarked == c("C", "S", "Q"),] 
+# It is what we expected, yes, because the  empty values in Embarked have no meaning, also
+# the deleted rows affected the C, Q, S occurrences.
+
+# Deleting columns (Cabin and Ticket from dataset).
+dfm$Cabin <- NULL
+dfm$Ticket <- NULL
+summary(dfm)
