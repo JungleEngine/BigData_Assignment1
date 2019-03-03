@@ -48,6 +48,36 @@ dfm$Ticket <- NULL
 summary(dfm)
 
 
+# Males and Females
+Males <- dfm[which(Data$Gender == "male"), ]
+Females <- dfm[which(Data$Gender == "female"), ]
+nrow(Males)
+nrow(Females)
+
+# Pie Chart of Genders
+cnt <- c(nrow(Males), nrow(Females))
+lbls <- c("Males", "Females")
+pie(cnt, labels = lbls, main = "Pie Chart of Genders in Titanic")
+pie(cnt, labels = lbls, main = "Pie Chart of Genders in Titanic", col = c("blue", "red"))
+
+# Pie Chart of Survivors in Titanic
+Males_Survived <- Males[which(Males$Survived == "1"), ]
+nrow(Males_Survived)
+Females_Survived <- Females[which(Females$Survived == "1"), ]
+nrow(Females_Survived)
+pie(c(nrow(Males_Survived), nrow(Females_Survived)), labels = lbls, main = "Pie Chart of Survivors in Titanic", col = c("red", "blue"))
+
+# Stacked Bar Chart of Survivors of Each Class
+counts <- table(Data$Survived, Data$Pclass)
+barplot(counts, ylab = "Count", xlab = "Class", main = "Stacked Bar Chart of Survivors of each class", col = c("blue","red"))
+legend("top", title = "Survived", legend = sort(unique(Data$Survived)), fill = c("red","blue"))
+
+# BoxPlot of Age
+boxplot(dfm$Age, main = "Age")
+
+# Density Distribution of Age
+plot(density(dfm$Age[which(dfm$Age != " ")]), main = "Age Distribution")
+
 
 # Remove all columns but passenger names and whether they survived or not.
 new_dataset = dfm[,c("Name", "Survived")]
