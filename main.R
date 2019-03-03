@@ -46,3 +46,10 @@ if(anyNA(dfm$Age)){
 dfm$Cabin <- NULL
 dfm$Ticket <- NULL
 summary(dfm)
+
+
+
+# Remove all columns but passenger names and whether they survived or not.
+new_dataset = dfm[,c("Name", "Survived")]
+write.csv(new_dataset, "titanic_preprocessed.csv")
+
